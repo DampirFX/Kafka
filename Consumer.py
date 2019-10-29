@@ -1,7 +1,6 @@
 from kafka import KafkaConsumer
 import datetime
 
-
 filename = datetime.datetime.now().strftime("%Y-%m-%d")
 
 #кластер кафки

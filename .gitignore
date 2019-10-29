@@ -103,3 +103,4 @@ venv.bak/
 # mypy
 .mypy_cache/
 /AvroUtils.dll
+/AvroUtils_64.dll

@@ -6,11 +6,11 @@ import AvroUtils
 kafka = '0.dual.kafka.qa-fxenv.com:9092','1.dual.kafka.qa-fxenv.com:9092','2.dual.kafka.qa-fxenv.com:9092'
 
 #Имя топика
-topic = 'MT4--All--Interday--Avro--V1'
+topic = 'Test123'
 
 consumer = KafkaConsumer(topic, bootstrap_servers=kafka)
-pathDll = 'c:/SibIT/autotest/kafka/AvroUtils.dll'
-pathSchema = 'C:/deploy/MT4_DIVIDENDS.avsc'
+pathDll = './AvroUtils.dll'
+pathSchema = './templates/MT5_DIVIDENDS.avsc'
 avroUtils = AvroUtils.JsonDeserializer(pathDll)
 
 for msg in consumer:
