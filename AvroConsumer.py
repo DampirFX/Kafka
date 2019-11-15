@@ -10,12 +10,14 @@ topic = 'Test123'
 
 consumer = KafkaConsumer(topic, bootstrap_servers=kafka)
 pathDll = './AvroUtils.dll'
-pathSchema = './templates/MT4_POSITION_OPEN.avsc'
+pathSchema = './templates/MT5_DIVIDENDS.avsc'
 avroUtils = AvroUtils.JsonDeserializer(pathDll)
 
 for msg in consumer:
-    print('Avro: ' + msg.value.decode())
+    #print('Avro: ' + msg.value.decode())
+    print('Avro: ')
+    print(msg.value)
     try:
-        print('Json: ' + avroUtils.fromAvroBinaryBase64(pathSchema,msg.value).decode() + '\n')
+        print('Json: ' + avroUtils.fromAvroBinary(pathSchema,msg.value).decode() + '\n')
     except Exception:
         print('Not valid message. Skip.')

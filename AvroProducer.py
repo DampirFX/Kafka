@@ -19,7 +19,9 @@ print('Json: ' + message)
 key = '1234'.encode()
 
 avroMessage = avroUtils.toAvroBinary(pathSchema,message.encode())
-print('Avro: ' + avroMessage.decode())
+#print('Avro: ' + avroMessage.decode())
+print('Avro: ')
+print(avroMessage)
 
 def on_send_success(record_metadata):
     print(record_metadata.topic)
