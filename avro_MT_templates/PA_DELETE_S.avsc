@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "name": "PriceAlertDeleted",
+  "namespace": "fxPriceAlert",
+  "fields": [
+    {
+      "name": "extId",
+      "type": "string"
+    },
+    {
+      "name": "extClientId",
+      "type": "string"
+    }
+  ]
+}

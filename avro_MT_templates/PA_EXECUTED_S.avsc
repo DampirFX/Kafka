@@ -1,0 +1,68 @@
+{
+  "type": "record",
+  "name": "PriceAlertExecuted",
+  "namespace": "fxPriceAlert",
+  "fields": [
+    {
+      "name": "extId",
+      "type": "string"
+    },
+    {
+      "name": "extClientId",
+      "type": "string"
+    },
+    {
+      "name": "instrument",
+      "type": "string"
+    },
+    {
+      "name": "alertLevel",
+      "type": "double"
+    },
+    {
+      "name": "direction",
+      "type": "string"
+    },
+    {
+      "name": "created",
+      "type": "string"
+    },
+    {
+      "name": "finished",
+      "type": "string"
+    },
+    {
+      "name": "quoteExecuted",
+      "type": {
+        "type": "record",
+        "name": "QuoteExecuted",
+        "fields": [
+          {
+            "name": "quoteInstrument",
+            "type": "string"
+          },
+          {
+            "name": "quoteRate",
+            "type": "double"
+          },
+          {
+            "name": "quoteSpread",
+            "type": "double"
+          },
+          {
+            "name": "quoteNumber",
+            "type": "long"
+          },
+          {
+            "name": "quoteTime",
+            "type": "string"
+          },
+          {
+            "name": "quoteNumDigits",
+            "type": "int"
+          }
+        ]
+      }
+    }
+  ]
+}
