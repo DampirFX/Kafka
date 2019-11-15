@@ -31,6 +31,27 @@ class JsonSerializer:
         funcMemoryFree(c_output);
         return result;
 
+    def toAvroBinary(self, schema, input):
+        funcMemoryFree = self.dll.MemoryFree
+        funcSerialize = self.dll.SerializeJsonToAvroBinary
+        funcSerialize.restype = ctypes.c_bool
+
+        c_schema = ctypes.c_char_p(schema.encode('ascii'));
+        c_input = ctypes.c_char_p(input);
+        c_inputLen = ctypes.c_uint(len(c_input.value))
+        c_output = ctypes.c_char_p(None)
+        c_outputLen = ctypes.c_uint(0)
+        c_error = ctypes.c_char_p(None)
+
+        if not funcSerialize(c_schema, c_input, c_inputLen, ctypes.byref(c_output), ctypes.byref(c_outputLen), ctypes.byref(c_error)):
+            error = c_error.value
+            funcMemoryFree(c_error);
+            raise Exception(error)
+
+        result = ctypes.string_at(c_output, size=c_outputLen.value)
+        funcMemoryFree(c_output);
+        return result;
+
     def toAvroBinaryBase64(self, schema, input):
         funcMemoryFree = self.dll.MemoryFree
         funcSerialize = self.dll.SerializeJsonToAvroBinaryBase64
@@ -71,6 +92,27 @@ class JsonDeserializer:
         c_schema = ctypes.c_char_p(schema.encode('ascii'));
         c_input = ctypes.c_char_p(input);
         c_inputLen = ctypes.c_uint(len(c_input.value))
+        c_output = ctypes.c_char_p(None)
+        c_outputLen = ctypes.c_uint(0)
+        c_error = ctypes.c_char_p(None)
+
+        if not funcDeserialize(c_schema, c_input, c_inputLen, ctypes.byref(c_output), ctypes.byref(c_outputLen), ctypes.byref(c_error)):
+            error = c_error.value
+            funcMemoryFree(c_error);
+            raise Exception(error)
+
+        result = c_output.value
+        funcMemoryFree(c_output);
+        return result;
+
+    def fromAvroBinary(self, schema, input):
+        funcMemoryFree = self.dll.MemoryFree
+        funcDeserialize = self.dll.DeserializeJsonFromAvroBinary
+        funcDeserialize.restype = ctypes.c_bool
+
+        c_schema = ctypes.c_char_p(schema.encode('ascii'));
+        c_input = ctypes.cast(input, ctypes.c_void_p);
+        c_inputLen = ctypes.c_uint(len(input))
         c_output = ctypes.c_char_p(None)
         c_outputLen = ctypes.c_uint(0)
         c_error = ctypes.c_char_p(None)

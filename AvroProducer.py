@@ -18,7 +18,7 @@ message = '{"EventTimeStamp":"2019-10-28T04:09:18.234","MT5Account":{"Account":"
 print('Json: ' + message)
 key = '1234'.encode()
 
-avroMessage = avroUtils.toAvroBinaryBase64(pathSchema,message.encode())
+avroMessage = avroUtils.toAvroBinary(pathSchema,message.encode())
 print('Avro: ' + avroMessage.decode())
 
 def on_send_success(record_metadata):

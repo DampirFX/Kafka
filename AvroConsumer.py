@@ -6,11 +6,11 @@ import AvroUtils
 kafka = '0.dual.kafka.qa-fxenv.com:9092','1.dual.kafka.qa-fxenv.com:9092','2.dual.kafka.qa-fxenv.com:9092'
 
 #Имя топика
-topic = 'MT5--Dividends--Interday--Avro--V1'
+topic = 'Test123'
 
 consumer = KafkaConsumer(topic, bootstrap_servers=kafka)
 pathDll = './AvroUtils.dll'
-pathSchema = './templates/MT5_DIVIDENDS.avsc'
+pathSchema = './templates/MT4_POSITION_OPEN.avsc'
 avroUtils = AvroUtils.JsonDeserializer(pathDll)
 
 for msg in consumer:
