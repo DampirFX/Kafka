@@ -1,0 +1,29 @@
+{
+  "namespace": "symbolExpiration",
+  "type": "record",
+  "name": "symbolExpiration",
+  "doc": "https://conf.fxclub.org/display/LIB/symbolExpirationStart+event",
+  "fields": [
+    {
+      "name": "symbol",
+      "type": "string"
+    },
+{
+      "name": "dateTime",
+      "type": "string"
+    },
+{
+      "name": "expirationId",
+      "type": ["null", "int"],
+      "default":null
+    },
+{
+      "name": "lastContract",
+      "type": "string"
+    },
+{
+      "name": "newContract",
+      "type": "string"
+    }
+  ]
+}

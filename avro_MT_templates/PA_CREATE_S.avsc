@@ -1,0 +1,31 @@
+{
+  "type": "record",
+  "name": "PriceAlertCreated",
+  "namespace": "fxPriceAlert",
+  "fields": [
+    {
+      "name": "extId",
+      "type": "string"
+    },
+    {
+      "name": "extClientId",
+      "type": "string"
+    },
+    {
+      "name": "instrument",
+      "type": "string"
+    },
+    {
+      "name": "alertLevel",
+      "type": "double"
+    },
+    {
+      "name": "direction",
+      "type": "string"
+    },
+    {
+      "name": "created",
+      "type": "string"
+    }
+  ]
+}
