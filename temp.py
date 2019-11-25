@@ -5,11 +5,9 @@ pathDll = './AvroUtils.dll'
 avroUtilstoAvro = AvroUtils.JsonSerializer(pathDll)
 avroUtilsfromAvro = AvroUtils.JsonDeserializer(pathDll)
 
-print(avroUtilstoAvro.version())
-print(avroUtilsfromAvro.version())
+pathSchema = './templates/MT4_DIVIDENDS.avsc'
 
-pathSchema = './templates/MT4_POSITION_OPEN.avsc'
-message = '{"Account":{"Balance":916276.37,"Comment":"","Country":"Russia","CurrencyCode":"USD","Equity":916223.10,"Group":"wbook_ru","ID":"112358","IsOnline":1,"LastActivityDate":"2019-10-28T09:53:59","LastConnectIP":"172.16.81.53","Leverage":500,"LockMarker":0,"Login":995092501,"MQID":"6C22DB73","Margin":205.66,"RegDate":"2016-11-28T11:09:36","SOAutochargeMarker":0},"EventTimeStamp":"2019-11-11T08:28:19.505","Order":{"Comment":"","Commission":0,"DealReason":"DEAL_REASON_CLIENT","InstrumentDigits":2,"Lot":0.20999999999999999,"Magic":0,"OpenCrossPrice":1,"OpenPrice":61.850000000000001,"OpenTime":"2019-11-11T11:21:18","OrderType":"OP_BUY","PL":-8.4000000000000004,"StopLossPrice":0,"Swaps":0,"Symbol":"BRN","TakeProfitPrice":0,"Ticket":40603089,"Volume":210},"headers":{"ACCOUNT":"995092501","ACCOUNT_TYPE":"MT4_MARKET","BROKER":"BVI","CLIENT_ID":"112358","CONTENT_TYPE":"application/json; charset=UTF-8","ENTITY_ACTION":"MT4_POSITION_OPEN","ENTITY_STATUS":"success","ENTITY_TYPE":"position","MESSAGE_CREATED":"2019-11-11T08:28:19.505","MESSAGE_FORMAT":"v1","MESSAGE_PRODUCER":"MTEventTransmitter","MESSAGE_PRODUCER_INSTANCE":"MT4_MARKET_REAL","MESSAGE_TYPE":"ENTITY_EVENT"}}'
+message = '{"EventTimeStamp":"2019-11-25T07:05:58.390","MT4Account":{"Balance":4699.74,"Comment":"test òåñò","Country":"Albania","CurrencyCode":"USD","Equity":6012.74,"Group":"abook_am","ID":"123","IsOnline":0,"LastActivityDate":"2019-10-28T07:55:22","LastConnectIP":"","Leverage":100,"LockMarker":0,"Login":995124959,"MQID":"D1541E31","Margin":1215.1,"RegDate":"2019-09-03T06:16:14","SOAutochargeMarker":0},"MT4DividendInfo":{"Amount":1.9,"Currency":"USD","DividendDate":"2019-08-28 03:45:00.000","ID":99928,"SourceSymbol":"AAPL","Symbol":"AAPL","SymbolDescription":"Apple Inc."},"MT4Order":{"CloseCrossPrice":null,"ClosePrice":null,"CloseTime":null,"Comment":"D_TC_#40602612 1.00 AAPL","Commission":0,"DealReason":null,"InstrumentDigits":null,"Lot":null,"Magic":null,"OpenCrossPrice":null,"OpenPrice":null,"OpenTime":"2019-11-25T10:05:55","OrderType":"OP_BALANCE","PL":190,"StopLossPrice":null,"Swaps":0,"Symbol":null,"TakeProfitPrice":null,"Ticket":40603647,"Volume":null}}'
 print(message)
 res_avro_64 = avroUtilstoAvro.toAvroBinaryBase64(pathSchema,message.encode())
 print(res_avro_64)

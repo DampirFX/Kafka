@@ -7,16 +7,16 @@ filename = datetime.datetime.now().strftime("%Y-%m-%d")
 kafka = '0.dual.kafka.qa-fxenv.com:9092','1.dual.kafka.qa-fxenv.com:9092','2.dual.kafka.qa-fxenv.com:9092'
 
 #Имя топика
-topic = 'mt4--account'
+topic = 'mt4--dividends'
 l = ''
 
 consumer = KafkaConsumer(topic, bootstrap_servers=kafka)
 
 for msg in consumer:
     f = open(filename + '.log', 'a')
-    # print('Header:')
-    # for l in msg.headers:
-    #     print(l)
+    print('Header:')
+    for l in msg.headers:
+         print(l)
     #
     print('Body:\n'+ msg.value.decode())
     print('Key:')

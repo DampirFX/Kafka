@@ -1,0 +1,16 @@
+import AvroUtils
+import AvroSchemaRegistry
+
+
+pathDll = './AvroUtils.dll'
+avroUtilstoAvro = AvroUtils.JsonSerializer(pathDll)
+avroUtilsfromAvro = AvroUtils.JsonDeserializer(pathDll)
+
+Url = 'https://avro-schemaregistry.qa-env.com/subjects/mt4--dividends-value/versions/latest/schema'
+pathSchema = AvroSchemaRegistry.GetSchema(Url)
+
+res_avro_64 = b'LjIwMTktMTEtMjVUMDc6MDU6NTguMzkwvpuDtQcQYWJvb2tfYW0GVVNEAg5BbGJhbmlhAhp0ZXN0IMOyw6XDscOyJjIwMTktMDktMDNUMDY6MTY6MTQmMjAxOS0xMC0yOFQwNzo1NToyMgAAAAAAAFlAAgACCtejcL1bskACZmZmZmb8kkACCtejcL18t0ACEEQxNTQxRTMxAgYxMjMCAAIAAgCwmQwIQUFQTAIUQXBwbGUgSW5jLgIIQUFQTC4yMDE5LTA4LTI4IDAzOjQ1OjAwLjAwMGZmZmZmZv4/BlVTRP6/3CYAABRPUF9CQUxBTkNFAAAmMjAxOS0xMS0yNVQxMDowNTo1NQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAZ0AAAjBEX1RDXyM0MDYwMjYxMiAxLjAwIEFBUEwAEjk5NTEyNDk1OQZCVkkGMTIzPmFwcGxpY2F0aW9uL2pzb247IGNoYXJzZXQ9VVRGLTgaTVQ0X0RJVklERU5EUw5zdWNjZXNzEmRpdmlkZW5kcy4yMDE5LTExLTI1VDA3OjA1OjU4LjM5MAR2MSRNVEV2ZW50VHJhbnNtaXR0ZXIeTVQ0X01BUktFVF9SRUFMGEVOVElUWV9FVkVOVA=='#avroUtilstoAvro.toAvroBinaryBase64(pathSchema,message.encode())
+print(res_avro_64)
+
+res_from_avro_64 = avroUtilsfromAvro.fromAvroBinaryBase64(pathSchema,res_avro_64)
+print(res_from_avro_64.decode() + '\n')
