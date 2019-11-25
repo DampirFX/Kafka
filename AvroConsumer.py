@@ -13,7 +13,7 @@ consumer = KafkaConsumer(topic, bootstrap_servers=kafka)
 pathDll = './AvroUtils.dll'
 #pathSchema = './templates/MT4_OPENED_POSITIONS_REPORT.avsc'
 schema = AvroSchemaRegistry.GetSchema('https://avro-schemaregistry.qa-env.com/subjects/mt4--dividends-value/versions/latest/schema')
-print(schema)
+
 avroUtils = AvroUtils.JsonDeserializer(pathDll)
 
 for msg in consumer:
