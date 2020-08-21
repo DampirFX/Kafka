@@ -61,12 +61,12 @@ kafka = '0.dual.kafka.qa-fxenv.com:9092','1.dual.kafka.qa-fxenv.com:9092','2.dua
 # Schema = AvroSchemaRegistry.GetSchema('https://avro-schemaregistry.qa-env.com/subjects/mt5--account-value/versions/latest/schema')
 
 
-# topic = 'mt4--split'
-# Schema = AvroSchemaRegistry.GetSchema('https://avro-schemaregistry.qa-env.com/subjects/mt4--split-value/versions/latest/schema')
+topic = 'mt4--split'
+Schema = AvroSchemaRegistry.GetSchema('https://avro-schemaregistry.qa-env.com/subjects/mt4--split-value/versions/latest/schema')
 
 # expiration_mt5
-topic = 'mt5--expiration'
-Schema = AvroSchemaRegistry.GetSchema('https://avro-schemaregistry.qa-env.com/subjects/mt5--expiration-value/versions/latest/schema')
+# topic = 'mt5--expiration'
+# Schema = AvroSchemaRegistry.GetSchema('https://avro-schemaregistry.qa-env.com/subjects/mt5--expiration-value/versions/latest/schema')
 
 consumer = KafkaConsumer(topic, bootstrap_servers=kafka)
 pathDll = './AvroUtils.dll'
