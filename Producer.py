@@ -6,11 +6,15 @@ from kafka.errors import KafkaError
 #кластер кафки
 kafka = '0.dual.kafka.qa-fxenv.com:9092','1.dual.kafka.qa-fxenv.com:9092','2.dual.kafka.qa-fxenv.com:9092'
 #Имя топика
-topic = 'Test123'
+topic = 'MTSourceReaderDevExpirationTopic'
 
-message = b'{"Account":{"Comment":"","Country":"SOM","CurrencyCode":"USD","Group":"bbook_en","ID":"5451555","IsOnline":1,"LastActivityDate":"2019-09-19T06:57:17","LastConnectIP":"172.16.81.53","Leverage":200,"LockMarker":0,"Login":700018124,"MQID":"0","RegDate":"2011-07-01T11:23:13","SOAutochargeMarker":0},"ConnectionInfo":{"Address":"172.16.81.53","ConnectionType":"USER_TYPE_CLIENT"},"EventTimeStamp":"2019-09-19T06:16:29.260","headers":{"ACCOUNT":"700018124","ACCOUNT_TYPE":"MT4_INSTANT","BROKER":"BVI","CLIENT_ID":"5451555","Content-Type":"application/json; charset=UTF-8","ENTITY_ACTION":"MT4_ACCOUNT_LOGIN","ENTITY_STATUS":"success","ENTITY_TYPE":"client","MESSAGE_CREATED":"2019-09-19T06:16:29.260","MESSAGE_FORMAT":"v1","MESSAGE_PRODUCER":"MTEventTransmitter","MESSAGE_PRODUCER_INSTANCE":"MT4_INSTANT_REAL1","MESSAGE_TYPE":"ENTITY_EVENT"}}'
+message = b'\x00\x00\x00\x00f\x0eExecute\x02Z\x10LBX_FCIL&2020-04-25T07:13:00\xac!\x06Z0U\x06Z0V&2020-04-24T07:20:00\x00\x00\x00\x00\x00\x16\xb4@\x00\x00\x00\x00\x00\x14\xb4@\x00\x00\x00\x00\x00\x12\xb4@&2020-04-24T07:20:00\x00\x00\x00\x00\x00 \xb4@\x00\x00\x00\x00\x00\x1e\xb4@\x00\x00\x00\x00\x00\x1c\xb4@'
+# b'{"dateTime":"2020-04-24T07:13:00","expirationId":2134,"expirationRates":{"firstAsk":5152,"firstBid":5148,"firstDateTime":"2020-04-24T07:20:00","firstMid":5150,"lastAsk":5142,"lastBid":5138,"lastDateTime":"2020-04-24T07:20:00","lastMid":5140},"lastContract":"Z0V","newContract":"Z0D","sourceId":"LBX_FCIL","status":"Execute","symbol":"Z"}'
 
-key = '1234'.encode()
+#
+
+#b'{"expirationExecute":{"Symbol":"ES","DateTime":"2020-04-02T05:32:00","ExpId":2074,"LastContract":"ES0H","NewContract":"ES0M","MTRates":{"LastAsk":25570,"LastMid":25570,"LastBid":25570,"NewAsk":25570,"NewMid":25570,"NewBid":25570},"LibetrexRates":{"LastAsk":25570,"LastMid":25570,"LastBid":25570,"NewAsk":25570,"NewMid":25570,"NewBid":25570}}}'
+#key = '1234'.encode()
     # b'{' \
     #       b'"symbol":"AAPL",' \
     #       b'"dateTime":"2019-08-28T02:55:18",' \
@@ -27,12 +31,12 @@ def on_send_success(record_metadata):
 def on_send_error(excp):
     print('I am an errback', exc_info=excp)
 
-def Send_message(topic, message, key):
+def Send_message(topic, message):#, key
     producer = KafkaProducer(bootstrap_servers=kafka)
-    future = producer.send(topic, message, key).add_callback(on_send_success).add_errback(on_send_error)
+    future = producer.send(topic, message).add_callback(on_send_success).add_errback(on_send_error)#, key
     try:
         record_metadata = future.get(timeout=10)
     except KafkaError:
         pass
 
-Send_message(topic,message,key)
+Send_message(topic,message)#,key
